@@ -390,5 +390,3 @@ jobs:
             echo "Required jobs did not complete successfully"
             exit 1
           fi
-
-# registration probe (validation copy)
