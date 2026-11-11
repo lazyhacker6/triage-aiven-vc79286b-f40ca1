@@ -23,6 +23,12 @@ on:
 
 run-name: Build Scans for ${{ github.event.workflow_run.display_title}}
 
+# Validation copy only: this organization blocks a write-scoped default GITHUB_TOKEN
+# ("Write permissions for workflows are disabled by the organization"), so the token
+# scope that this workflow receives upstream (Actions: write, Contents: write, ...)
+# is granted explicitly here instead. Removal would narrow the workflow's capability.
+permissions: write-all
+
 # This workflow runs after the completion of the CI workflow triggered on a "pull_request" event.
 # The "pull_request" event type is run in an unprivileged context without access to the repository
 # secrets. This means that PRs from public forks cannot publish Gradle Build Scans or modify the
