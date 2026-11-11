@@ -1,0 +1,9 @@
+name: ZZ Probe Call
+on: push
+jobs:
+  b:
+    uses: ./.github/workflows/build.yml
+    with:
+      is-trunk: false
+      is-public-fork: true
+    secrets: inherit
