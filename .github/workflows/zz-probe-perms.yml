@@ -1,0 +1,10 @@
+name: ZZ Probe Perms
+on: push
+permissions:
+  contents: write
+  statuses: write
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo probe-token-permissions

