@@ -114,3 +114,5 @@ jobs:
         run: |
           python .github/scripts/junit.py \
            --path build/junit-xml >> $GITHUB_STEP_SUMMARY
+
+# registration probe
