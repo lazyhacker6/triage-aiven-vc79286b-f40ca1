@@ -41,6 +41,12 @@ jobs:
     # `test-catalog` branch, neither of which exists in this copy, so the job is
     # skipped to let this workflow (the trigger for "CI Complete") complete.
     if: ${{ false }}
+    # Validation copy only: build.yml's `update-test-catalog` job requests
+    # `contents: write`. A reusable workflow can never exceed the caller's grant, and
+    # this repository's default token is read-only (organization policy), so the call
+    # is rejected as invalid unless the caller grants it explicitly.
+    permissions:
+      contents: write
     uses: ./.github/workflows/build.yml
     with:
       is-trunk: ${{ github.ref == 'refs/heads/trunk' }}
