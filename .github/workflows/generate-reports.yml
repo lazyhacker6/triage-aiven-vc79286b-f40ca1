@@ -16,6 +16,7 @@
 name: Flaky Test Report
 on:
   workflow_dispatch:      # Let us run manually
+  pull_request:
 
   schedule:
     - cron: '0 6 * * *'   # Run daily at 6am UTC
