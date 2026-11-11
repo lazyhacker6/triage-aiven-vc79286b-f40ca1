@@ -1,9 +1,0 @@
-name: ZZ Probe Write
-on: push
-permissions:
-  contents: write
-jobs:
-  p:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ok

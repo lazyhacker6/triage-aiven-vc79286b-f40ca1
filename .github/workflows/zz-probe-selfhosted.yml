@@ -1,0 +1,7 @@
+name: ZZ Probe SelfHosted
+on: push
+jobs:
+  p:
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - run: echo "$(uname -a)"

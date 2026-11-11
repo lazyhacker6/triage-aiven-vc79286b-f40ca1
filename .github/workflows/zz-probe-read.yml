@@ -1,9 +1,0 @@
-name: ZZ Probe Read
-on: push
-permissions:
-  contents: read
-jobs:
-  p:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ok
