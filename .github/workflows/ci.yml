@@ -36,9 +36,32 @@ concurrency:
 
 jobs:
   build:
+    # Validation copy only: upstream runs the full Kafka compile plus a 6-entry test
+    # matrix of up to 3.5h each. That needs Develocity credentials and the
+    # `test-catalog` branch, neither of which exists in this copy, so the job is
+    # skipped to let this workflow (the trigger for "CI Complete") complete.
+    if: ${{ false }}
     uses: ./.github/workflows/build.yml
     with:
       is-trunk: ${{ github.ref == 'refs/heads/trunk' }}
       is-public-fork: ${{ github.event.pull_request.head.repo.fork || false }}
     secrets:
       inherit
+
+  build-scan-artifact:
+    # Validation copy only: stand-in for the `build-scan-<java>-<flaky>-<new>`
+    # artifact that ./.github/actions/run-gradle uploads from the test matrix above.
+    # The name format is unchanged, so "CI Complete" derives the same matrix value.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create build scan data
+        run: |
+          mkdir -p ~/.gradle/build-scan-data
+          echo "validation placeholder" > ~/.gradle/build-scan-data/placeholder.txt
+      - name: Archive build scan
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-scan-25-noflaky-nonew
+          path: ~/.gradle/build-scan-data
+          compression-level: 9
+          if-no-files-found: ignore
